@@ -1,2 +1,24 @@
 If allow_pickle=False, NumPy will not allow loading arrays containing pickled Python objects, and an error will be raised.
 If allow_pickle=True, NumPy will allow the loading of pickled Python objects (but this can pose a security risk when working with untrusted data, as malicious code could execute during deserialization).
+
+
+Steps:
+
+1.Imports libs
+2.Random Seed Initialization & set device
+3.Load and Preprocess Dataset
+- npy data => use numpy.load()
+- set X, y
+4.Dataset Splitting using train_test_split from sklearn.model_selection: Train, Val, Test
+5.Standardize the Features using StandardScaler
+6.Convert data into tensors: why: to use Pytorch and GPU
+7.Create Dataloaders
+- Wraps the dataset in a CustomDataset class. (why:
+- Uses a DataLoader to load batches of data during training.
+8.Model Setup
+9.Define Optimizer and Loss
+10.Training Loop
+- Training
+- Validation
+11.Track metrics: losses and accs of training and validation
+12.Plot results

@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
-from torch . utils . data import Dataset, DataLoader
-from sklearn . model_selection import train_test_split
-from sklearn . preprocessing import StandardScaler
+from torch.utils.data import DataLoader
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 from dataset import CustomDataset
 from MLP_model import MLP
 from utils import compute_accuracy
@@ -12,16 +12,17 @@ from utils import compute_accuracy
 random_state = 59
 np.random.seed(random_state)
 torch.manual_seed(random_state)
-if torch.cuda.is_available() :
+if torch.cuda.is_available():
     torch.cuda.manual_seed(random_state)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 dataset_path = "/Users/thachha/Desktop/data/NonLinear_data.npy"
 dataset = np.load(dataset_path, allow_pickle=True).item()
-#print(dataset)
+# print(dataset)
 X, y = dataset["X"], dataset["labels"]
-print(X.shape , y. shape ) #(300, 2) (300,)
-#Split dataset 7:2:1
+print(X.shape, y.shape)  # (300, 2) (300,)
+
+# Split dataset 7:2:1
 val_size = 0.2
 test_size = 0.125
 is_shuffle = True
@@ -55,7 +56,6 @@ y_train = torch.tensor(y_train, dtype=torch.long)
 y_val = torch.tensor(y_val, dtype=torch.long)
 y_test = torch.tensor(y_test, dtype=torch.long)
 
-
 batch_size = 32
 train_dataset = CustomDataset(X_train, y_train)
 val_dataset = CustomDataset(X_val, y_val)
@@ -65,10 +65,10 @@ val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False
                         )
 
 input_dims = X_train.shape[1]
-output_dims = torch.unique(y_train).shape[0] #calulate how many classes
+output_dims = torch.unique(y_train).shape[0]  # calculate how many classes
 hidden_dims = 128
 
-model = MLP(input_dims=input_dims , hidden_dims=hidden_dims , output_dims= output_dims).to(device)
+model = MLP(input_dims=input_dims, hidden_dims=hidden_dims, output_dims=output_dims).to(device)
 
 # Learning rate
 lr = 1e-2  # Learning rate (0.01)
@@ -79,7 +79,7 @@ criterion = nn.CrossEntropyLoss()  # Phân loại đa lớp => Cross Entropy
 # Optimizer
 optimizer = torch.optim.SGD(model.parameters(), lr=lr)  # Stochastic Gradient Descent
 
-#Training
+# Training
 epochs = 100
 train_losses = []
 val_losses = []
@@ -110,7 +110,6 @@ for epoch in range(epochs):
 
         train_predict.append(outputs.detach().cpu())
         train_target.append(y_samples.cpu())
-
 
     train_loss /= len(train_loader)
     train_losses.append(train_loss)
@@ -147,8 +146,7 @@ for epoch in range(epochs):
     # Print progress
     print(
         f"\nEPOCH {epoch + 1}:\tTraining loss: {train_loss:.3f}\tValidation loss: {val_loss:.3f}"
-        )
-
+    )
 
 fig, ax = plt.subplots(2, 2, figsize=(6, 6))
 ax[0, 0].plot(train_losses, color='green')
