@@ -1,0 +1,34 @@
+1. Data Loading and Preprocessing:
+-The dataset is loaded from a CSV file (Auto_MPG_data.csv).
+-Features (X) and target (y) are separated.
+-The data is split into training, validation, and test sets using train_test_split.
+-The features are standardized using StandardScaler.
+
+2. Conversion to PyTorch Tensors:
+- The data (both features and targets) is converted to PyTorch tensors.
+- Dataset Creation:
+
+Custom datasets (CustomDataset) are created for the training and validation sets.
+DataLoader objects are used to handle batching and shuffling of data.
+Model Definition:
+
+An MLP model is defined, consisting of an input layer, one hidden layer with 64 neurons, and an output layer.
+The model is transferred to the device (GPU or CPU).
+Loss Function and Optimizer:
+
+The loss function is set to Mean Squared Error (MSELoss).
+The optimizer used is Stochastic Gradient Descent (SGD) with a learning rate of 0.01.
+Training Loop:
+
+The model is trained over 100 epochs.
+In each epoch, the model's weights are updated by computing the loss on the training data and performing backpropagation.
+The training loss and R-squared value are tracked for each epoch.
+Validation:
+
+After each epoch, the model is evaluated on the validation set, and the validation loss and R-squared value are recorded.
+Evaluation on Test Set:
+
+After training, the model is evaluated on the test set, and the R-squared value is computed for the test data.
+Visualization:
+
+A plot is generated to show the training and validation losses over the epochs.

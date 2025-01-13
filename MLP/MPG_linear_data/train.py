@@ -19,9 +19,12 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 dataset_path = "/Users/thachha/Desktop/data/Auto_MPG_data.csv"
 dataset = pd.read_csv(dataset_path)
+print(dataset.info)
 
-X = dataset.drop(columns ="MPG").values
-y = dataset["MPG"].values
+
+
+X = dataset.drop(columns ="MPG_linear_data").values
+y = dataset["MPG_linear_data"].values
 
 val_size = 0.2
 test_size = 0.125

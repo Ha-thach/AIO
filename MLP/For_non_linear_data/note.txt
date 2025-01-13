@@ -1,0 +1,2 @@
+If allow_pickle=False, NumPy will not allow loading arrays containing pickled Python objects, and an error will be raised.
+If allow_pickle=True, NumPy will allow the loading of pickled Python objects (but this can pose a security risk when working with untrusted data, as malicious code could execute during deserialization).
