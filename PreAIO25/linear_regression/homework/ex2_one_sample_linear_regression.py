@@ -1,7 +1,5 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import random
-from linear_regression.homework.ex1_advertising_regression import prepare_data
+
 
 def predict(x1 , x2 , x3 , w1 , w2 , w3 , b):
     y_hat = w1 * x1 + w2 * x2 + w3 * x3 + b
@@ -69,43 +67,37 @@ def implement_linear_regression(X_data , y_data , epoch_max = 50, lr = 1e-5):
             losses.append(loss)
     return (w1 ,w2 ,w3 ,b, losses)
 
-# y = predict (x1 =1, x2 =1, x3 =1, w1 =0, w2 =0.5 , w3 =0, b =0.5)
-# print(y)
+# y_hat = predict (x1 =1, x2 =1, x3 =1, w1 =0, w2 =0.5 , w3 =0, b =0.5)
+# print(y_hat) # #Result Question2 A
 # l = compute_loss_mse( y_hat =1, y =0.5)
-# print (l)
-# #Result Question2 A
-# #Result Question3 A
+# print (l) # #Result Question3 A
 # g_wi = compute_gradient_wi(xi =1.0 , y=1.0 , y_hat =0.5)
-# print(g_wi)
-# #Result Question4 A
+# print(g_wi) # #Result Question4 A
 # g_b = compute_gradient_b (y=2.0 , y_hat =0.5)
-# print(g_b)
-# #Result Question5 B
+# print(g_b) # Result Question5 B
 # after_wi = update_weight_wi (1.0 , -0.5 ,1e-5)
-# print(after_wi)
-# #Result Question6 A
+# print(after_wi) #Result Question6 A
 # after_b = update_weight_b (b=0.5 , db = -1.0 , lr = 1e-5)
-# print(after_b)
-# #Result Question7 A
+# print(after_b) #Result Question7 A
 
-X,y = prepare_data("advertising.csv")
-(w1 ,w2 ,w3 ,b, losses) = implement_linear_regression(X,y)
-plt.plot(losses[:100])
-plt.xlabel("#Iteration")
-plt.ylabel("Loss")
-plt.show()
-
-print(w1,w2,w3)
-##Result Question 8 A
-
-#given new data
-tv = 19.2
-radio = 35.9
-newspaper = 51.3
-sales = predict(tv, radio, newspaper, w1, w2, w3, b)
-print(f"Predicted sales is {sales}")
-
-# #Result Question 9 B
-l = compute_loss_mae ( y_hat =1, y =0.5)
-print (l)
-# #Result Question 9 A
+# X,y = prepare_data("advertising.csv")
+# (w1 ,w2 ,w3 ,b, losses) = implement_linear_regression(X,y)
+# plt.plot(losses[:100])
+# plt.xlabel("#Iteration")
+# plt.ylabel("Loss")
+# plt.show()
+#
+# print(w1,w2,w3)
+# ##Result Question 8 A
+#
+# #given new data
+# tv = 19.2
+# radio = 35.9
+# newspaper = 51.3
+# sales = predict(tv, radio, newspaper, w1, w2, w3, b)
+# print(f"Predicted sales is {sales}")
+#
+# # #Result Question 9 B
+# l = compute_loss_mae ( y_hat =1, y =0.5)
+# print (l)
+# # #Result Question 10 A

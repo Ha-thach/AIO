@@ -10,7 +10,9 @@ from sklearn.preprocessing import StandardScaler
 """Data loading, train_slit test and preprocessing using StandardScalar, convert from numpy to tensor """
 data =load_iris()
 #print(data)
+
 print(data.keys()) #dict_keys(['data', 'target', 'frame', '...
+exit()
 print(type(data)) #<class 'sklearn.utils._bunch.Bunch'>
 print(data.data.shape) #(150, 4)
 print(data.target.shape) #(150,)

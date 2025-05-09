@@ -19,7 +19,7 @@ def update_weight(theta, lr, dL):
     theta = theta - lr * dL
     return theta
 
-data=np.genfromtxt("/Users/thachha/PycharmProjects/AIO24/logistic_regression/data.csv", delimiter=",",skip_header=1)
+data=np.genfromtxt("/PreAIO25/logistic_regression/data.csv", delimiter=",", skip_header=1)
 #print(data)
 #print(type(data))
 

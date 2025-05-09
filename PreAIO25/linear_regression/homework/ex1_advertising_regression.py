@@ -31,7 +31,7 @@ def prepare_data(file_name_dataset):
     return X, y
 
 X,y = prepare_data ("advertising.csv")
-#list = [sum(X[0][:5]) , sum(X[1][:5]) , sum(X[2][:5]) , sum(y[:5])]
-#print(list)
+list = [sum(X[0][:5]) , sum(X[1][:5]) , sum(X[2][:5]) , sum(y[:5])]
+print(list)
 
 #Result A

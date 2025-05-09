@@ -1,0 +1,55 @@
+Application:
+- Model Deployment
+
+Characteristics:
+- Open-source Python Framework
+- Easy to use
+- Limit in front end design
+
+Markdown: định dạng văn bản, gần giống với Latex
+st.write: tương tự markdown, print text out to screen without formatting
+
+
+Anaconda: can create multiple virtual environments which is installed multiple version of python at the same time to avoid conflict
+
+conda create
+conda activate
+
+
+Syntax
+st.markdown(text)
+st.write("",variable)
+st.code("", language="")
+
+st.echo ~ st.write
+st.logo("")
+st.audio()
+st.video()
+st.checkbox()
+st.radio() #one choice in multiple choice
+st.selectbox()
+st.sidebar.selectbox() #sidebar: luôn luôn nằm bên trái, ở đó có một selectbox
+st.multiselect()
+st.slider
+st.select_slider
+BUTTON
+st.button
+TEXT
+st.text_input
+st.nuber_input
+st.slider
+
+CHAT ELEMENTS
+st.chat_input
+
+FILE UPLOAD WIDGET
+st.file_uploader
+
+FORM: khung có nhiều components bên trong
+
+with st.form("name"):
+    col1, .. coln = st.columns(n)
+    name1 = col1.text_input("")
+    submitted = st.form_submit_button()
+
+st.cache_data: chỉ load data một lần duy nhất vào lần đầu tiên, sau đó có sẵn, ko cần load nữa, trừ khi server không cần hoạt động nữa

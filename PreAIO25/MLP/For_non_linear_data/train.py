@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from dataset import CustomDataset
 from MLP_model import MLP
-from utils import compute_accuracy
+from PreAIO25.MLP.utils import compute_accuracy
 
 random_state = 59
 np.random.seed(random_state)
@@ -59,11 +59,13 @@ y_test = torch.tensor(y_test, dtype=torch.long)
 batch_size = 32
 train_dataset = CustomDataset(X_train, y_train)
 val_dataset = CustomDataset(X_val, y_val)
+test_dataset = CustomDataset(X_test, y_test)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True
                           )
 val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False
                         )
-
+test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False
+                        )
 input_dims = X_train.shape[1]
 output_dims = torch.unique(y_train).shape[0]  # calculate how many classes
 hidden_dims = 128
@@ -80,7 +82,7 @@ criterion = nn.CrossEntropyLoss()  # Phân loại đa lớp => Cross Entropy
 optimizer = torch.optim.SGD(model.parameters(), lr=lr)  # Stochastic Gradient Descent
 
 # Training
-epochs = 100
+epochs = 300
 train_losses = []
 val_losses = []
 train_accs = []
@@ -117,7 +119,7 @@ for epoch in range(epochs):
     train_predict = torch.cat(train_predict)
     train_target = torch.cat(train_target)
     train_acc = compute_accuracy(train_predict, train_target)
-    train_accs.append(train_accs)
+    train_accs.append(train_acc)
 
     # Validation phase
     val_loss = 0.0
@@ -141,14 +143,14 @@ for epoch in range(epochs):
     val_predict = torch.cat(val_predict)
     val_target = torch.cat(val_target)
     val_acc = compute_accuracy(val_predict, val_target)
-    val_accs.append(val_accs)
+    val_accs.append(val_acc)
 
     # Print progress
     print(
         f"\nEPOCH {epoch + 1}:\tTraining loss: {train_loss:.3f}\tValidation loss: {val_loss:.3f}"
     )
 
-fig, ax = plt.subplots(2, 2, figsize=(6, 6))
+fig, ax = plt.subplots(2, 2, figsize=(12, 10))
 ax[0, 0].plot(train_losses, color='green')
 ax[0, 0].set(xlabel='Epoch', ylabel='Loss')
 ax[0, 0].set_title('Training Loss')
@@ -165,3 +167,33 @@ ax[1, 1].plot(val_accs, color='orange')
 ax[1, 1].set(xlabel='Epoch', ylabel='Accuracy')
 ax[1, 1].set_title('Validation Accuracy')
 plt.show()
+
+
+# Evaluate the model on the test set
+test_target = []
+test_predict = []
+model.eval()  # Set the model to evaluation mode
+
+with torch.no_grad():  # Disable gradient computation for efficiency
+    for X_samples, y_samples in test_loader:
+        # Move data to the appropriate device (e.g., GPU if available)
+        X_samples = X_samples.to(device)
+        y_samples = y_samples.to(device)
+
+        # Make predictions using the model
+        outputs = model(X_samples)
+
+        # Store predictions and true targets for evaluation
+        test_predict.append(outputs.cpu())
+        test_target.append(y_samples.cpu())
+
+# Concatenate predictions and targets
+test_predict = torch.cat(test_predict)
+test_target = torch.cat(test_target)
+
+# Compute test accuracy
+test_acc = compute_accuracy(test_predict, test_target)
+
+# Print evaluation results
+print('Evaluation on test set:')
+print(f'Accuracy: {test_acc:.2f}')

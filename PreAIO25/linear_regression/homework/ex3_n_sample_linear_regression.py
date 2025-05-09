@@ -1,7 +1,6 @@
-import numpy as np
 import matplotlib.pyplot as plt
 import random
-from linear_regression.homework.ex1_advertising_regression import prepare_data
+from PreAIO25.linear_regression.homework.ex1_advertising_regression import prepare_data
 
 def predict(x1 , x2 , x3 , w1 , w2 , w3 , b):
     y_hat = w1 * x1 + w2 * x2 + w3 * x3 + b

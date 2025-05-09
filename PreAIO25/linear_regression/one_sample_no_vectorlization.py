@@ -44,7 +44,7 @@ def gradient_Huber(y_pred, y, x, delta=5):
     return dw, db
 def gradient_from_MSE_loss(x, y_pred, y):
     dw = 2 * x * (y_pred - y)
-    db = x * (y_pred - y)
+    db = 2 * (y_pred - y)
     return dw, db
 def gradient_from_MAE_loss(x, y_pred, y):
     dw = x * (y_pred - y) / abs(y_pred - y)
@@ -59,7 +59,7 @@ def update_weight(w, b, lr, dw, db):
 
 def main():
     # Load and validate data
-    data = np.genfromtxt("/Users/thachha/PycharmProjects/AIO24/linear_regression/data.csv", delimiter=',').tolist()
+    data = np.genfromtxt("/PreAIO25/linear_regression/data.csv", delimiter=',').tolist()
     x_data = get_column(data, 0)
     y_data = get_column(data, 1)
     print(x_data)
